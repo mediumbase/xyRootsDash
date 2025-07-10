@@ -1,5 +1,0 @@
-Analysis Results for plant4.jpg
-========================================
-Plant Size:
-  Width: 0.28 inches
-  Height: 0.46 inches
