@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>Home Dashboard</h1>
+            <div id="ip-address">IP: Loading...</div>
+        </div>
+        <div id="datetime">Loading time...</div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left Jumbo Container -->
+        <div class="left-jumbo">
+            <!-- Video and Stem Outline Section -->
+            <div class="video-section">
+                <!-- Real Feed (Kinect RGB with detection) -->
+                <div class="video-feed">
+                    <img id="real-feed" src="{{ url_for('video_feed') }}" alt="Real Plant Feed">
+                    <div class="video-buttons">
+                        <button class="snapshot-button" onclick="takeSnapshot()">Snapshot</button>
+                        <button class="timelapse-button" onclick="startTimeLapse()">Time-Lapse</button>
+                        <button class="analyze-button" onclick="analyzeImages()">Analyze</button>
+                    </div>
+                </div>
+                <!-- Stem Outline (Digital View from Depth) -->
+                <div class="stem-outline">
+                    <img id="stem-outline" src="{{ url_for('serve_stem_outline') }}" alt="Stem Outline">
+                </div>
+            </div>
+
+            <!-- Sensor Stats Section -->
+            <div class="sensor-stats">
+                <!-- Outside Sensors -->
+                <div class="sensor-outside">
+                    <div class="widget">
+                        <h2>Power</h2>
+                        <p id="analog-value">N/A</p>
+                    </div>
+                    <div class="widget">
+                        <h2>Light</h2>
+                        <p id="color-red">N/A</p>
+                    </div>
+                    <div class="widget">
+                        <h2>Motion</h2>
+                        <p id="accel-x">N/A</p>
+                    </div>
+                    <div class="widget">
+                        <h2>Pressure</h2>
+                        <p id="pressure">N/A</p>
+                    </div>
+                    <div class="widget">
+                        <h2>Temp</h2>
+                        <p id="temperature-sht">N/A</p>
+                    </div>
+                </div>
+                <!-- Inside Sensors -->
+                <div class="sensor-inside">
+                    <div class="widget">
+                        <h5>CPU</h5>
+                        <p id="cpu-usage">N/A</p>
+                    </div>
+                    <div class="widget">
+                        <h5>RAM</h5>
+                        <p id="ram-usage">N/A</p>
+                    </div>
+                    <div class="widget">
+                        <h5>DRIVE</h5>
+                        <p id="storage-usage">N/A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Jumbo Container -->
+        <div class="right-jumbo">
+            <div class="four-box-layout">
+                <!-- Plant Growth Section (Timelapse) -->
+                <div class="box">
+                    <h3>Growth Timelapse</h3>
+                    <img id="view3-image" src="{{ url_for('get_view3_image') }}" alt="Growth Timelapse" style="width: 100%; height: auto;">
+                    <div class="plant-controls">
+                        <input type="range" id="snapshot-slider" min="0" max="0" value="0">
+                        <button id="capture-snapshot">Capture Snapshot</button>
+                    </div>
+                </div>
+                <!-- Last 5 Detections -->
+                <div class="box">
+                    <h3>Last 5 Detections</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Label</th>
+                                <th>Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detections-table-body">
+                            <tr>
+                                <td colspan="3">Loading detections...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Detection Insights -->
+                <div class="box" id="detection-insights-box">
+                    <h3>Detection Insights</h3>
+                    <div id="detection-insights">
+                        <p>Loading detection insights...</p>
+                    </div>
+                </div>
+                <!-- Growth Rate -->
+                <div class="box">
+                    <h3>Growth Rate</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plant</th>
+                                <th>Rate</th>
+                                <th>Height</th>
+                                <th>Planted</th>
+                            </tr>
+                        </thead>
+                        <tbody id="growth-rate-table-body">
+                            <tr>
+                                <td colspan="4">Loading growth rate data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Growth Graph -->
+                <div class="box">
+                    <h3>Growth Graph</h3>
+                    <img id="growth-graph" src="{{ url_for('growth_graph') }}" alt="Growth Graph" style="width: 100%; height: auto;">
+                </div>
+                <!-- Seasonal Status -->
+                <div class="box">
+                    <h3>Seasonal Status</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plant</th>
+                                <th>Start Date</th>
+                                <th>Current Stage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="seasonal-status-table-body">
+                            <tr>
+                                <td colspan="3">Loading seasonal status...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Harvest Scheduler -->
+                <div class="box">
+                    <h3>Harvest Scheduler</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plant</th>
+                                <th>Predicted Harvest Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="harvest-scheduler-table-body">
+                            <tr>
+                                <td colspan="2">Loading harvest scheduler...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Weather Map -->
+                <div class="box">
+                    <h3>Weather Map</h3>
+                    <iframe src="https://www.rainviewer.com/map.html?loc=42.3223,-83.1763,8&oFa=0&oC=0&oU=0&oCS=1&oF=0&oAP=0&c=1&o=83&lm=1&layer=radar&sm=1&sn=1" style="width: 100%; height: 200px; border: none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/dataDetection.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/dataSensor.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/dataGrowth.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/dataHarvest.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/snapshot.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/timelapse.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/analyze_image.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/routing.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/dataFetch.js') }}"></script>
+    <script>
+        // Update View 3 image based on slider value
+        document.getElementById('snapshot-slider').addEventListener('input', function() {
+            const idx = this.value;
+            document.getElementById('view3-image').src = `/get_view3_image?idx=${idx}`;
+        });
+
+        // Capture snapshot and update slider
+        document.getElementById('capture-snapshot').addEventListener('click', function() {
+            fetch('/capture_snapshot', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message || data.error);
+                    if (data.message) {
+                        fetch('/get_snapshot_count')
+                            .then(resp => resp.json())
+                            .then(countData => {
+                                const slider = document.getElementById('snapshot-slider');
+                                slider.max = countData.count - 1;
+                                slider.value = countData.count - 1;
+                                document.getElementById('view3-image').src = `/get_view3_image?idx=${slider.value}`;
+                            });
+                    }
+                });
+        });
+
+        // Initialize slider max value
+        fetch('/get_snapshot_count')
+            .then(resp => resp.json())
+            .then(data => {
+                document.getElementById('snapshot-slider').max = data.count - 1;
+            });
+
+        // Refresh stem outline periodically for live update
+        setInterval(() => {
+            const stemImg = document.getElementById('stem-outline');
+            stemImg.src = `/get_stem_outline?t=${new Date().getTime()}`;
+        }, 50); // Match backend update rate
+    </script>
+</body>
+</html>

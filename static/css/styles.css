@@ -1,0 +1,223 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* Header */
+.header {
+    background: #fff;
+    color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+#ip-address, #datetime {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Left Jumbo */
+.left-jumbo {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Video Section */
+.video-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.video-feed, .stem-outline {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-feed img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.video-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.video-buttons button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.video-buttons button:hover {
+    background: #0056b3;
+}
+
+.stem-outline {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#stem-canvas {
+    width: 100%;
+    height: 360px;
+}
+
+.neon-text {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Sensor Stats */
+.sensor-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.sensor-outside, .sensor-inside {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.widget {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.widget h2, .widget h5 {
+    margin: 0 0 10px;
+    font-weight: 500;
+}
+
+.widget p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Right Jumbo */
+.right-jumbo {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.four-box-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.box {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.box h3 {
+    margin: 0 0 10px;
+    font-weight: 500;
+}
+
+.box img, .box iframe {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.box table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.box th, .box td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.box th {
+    background: #e9ecef;
+}
+
+.plant-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.plant-controls input[type="range"] {
+    flex: 1;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+}
+
+.plant-controls button {
+    padding: 8px 16px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.plant-controls button:hover {
+    background: #218838;
+}
+
+#detection-insights-box.highlight {
+    border: 2px solid #ff9800;
+}
