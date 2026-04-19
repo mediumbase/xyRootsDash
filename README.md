@@ -24,6 +24,8 @@ xyRootDash is a Flask-based web application for precision agriculture, monitorin
    libhdf5-dev make wget llvm libxml2-dev libxmlsec1-dev xz-utils \
    python3.8 python3.8-venv python3.8-dev python3-pip mariadb-server
    sudo apt autoremove
+   sudo apt update
+   sudo apt install libmariadb-dev mariadb-client gcc python3-dev
    ```
 
 2. **Install pyenv**  
@@ -45,8 +47,8 @@ xyRootDash is a Flask-based web application for precision agriculture, monitorin
 
 4. **Set Up Virtual Environment**  
    ```bash
-   python3 -m venv renv
-   source renv/bin/activate
+   python3 -m venv x86
+   source x86/bin/activate
    pip install --upgrade pip
    ```
 
